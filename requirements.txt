@@ -1,0 +1,11 @@
+beautifulsoup4
+docx
+fitz
+ffmpeg-python
+openai
+PyMuPDF
+Pillow
+PyQt5
+python-docx
+python-vlc
+whisper
