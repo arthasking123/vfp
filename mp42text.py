@@ -15,6 +15,7 @@ from docx.shared import Inches
 import fitz
 import ffmpeg
 import openai
+from openai import OpenAI
 import vlc
 from bs4 import BeautifulSoup
 from PyQt5.QtCore import (QByteArray, QBuffer, QIODevice, QMimeData, QSize, QTimer, Qt, pyqtSignal, 
@@ -48,7 +49,7 @@ class SubtitleThread(QThread):
 
     def extractAudio(self):
         audioPath = "temp_audio.mp3"
-        command = f"ffmpeg -i \"{self.videoPath}\"  -q:a 0 -map a \"{audioPath}\""
+        command = f"ffmpeg -i \"{self.videoPath}\"  -q:a 0 -map a -y \"{audioPath}\""
         os.system(command)        
         return audioPath
 
@@ -277,7 +278,7 @@ class VideoPlayer(QMainWindow):
             QMessageBox.information(self, "Info", "apikey is None")
             return
         segments = self.extractTextAndImages()
-        print(segments)
+        # print(segments)
         
         # 初始化进度对话框
         self.progressDialog = QProgressDialog("Optimizing text...", "Cancel", 0, 100, self)
@@ -292,6 +293,7 @@ class VideoPlayer(QMainWindow):
 
     def optimizeInBackground(self, segments):
         optimized_segments = []
+        client = OpenAI(api_key = openai.api_key)
         for i, segment in enumerate(segments):
             # 这里是一个示例，你的实际逻辑可能会有所不同
             # 假设 optimizeTextWithOpenAI 返回优化后的内容和进度
@@ -303,7 +305,7 @@ class VideoPlayer(QMainWindow):
                 system_message = "将以下口语化表述整理成连贯性的技术文章段落。"
                 user_message = text_to_optimize
 
-                response = openai.ChatCompletion.create(
+                response = client.chat.completions.create(
                     model="gpt-3.5-turbo",
                     messages=[
                         {"role": "system", "content": system_message},
@@ -311,7 +313,7 @@ class VideoPlayer(QMainWindow):
                     ]
                 )
 
-                optimized_text = response['choices'][0]['message']['content']
+                optimized_text = response.choices[0].message.content
                 optimized_segments.append(optimized_text.strip())
             elif segment['type'] == 'image':
                 optimized_segments.append(segment['content'])  # 直接添加图片
