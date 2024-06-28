@@ -45,3 +45,7 @@ pip install -r requirements.txt
 4. 将更改推送到分支 (`git push origin feature-branch`)。
 5. 创建一个新的Pull Request。
 
+## 近期TODO LIST
+
+1. 语音识别加入识别评分，对评分有混淆的词语在编辑界面逐个提示用户校正，评分高的略过校正步骤，提升文本校正效率
+2. 加入自定义词库，实现专有词汇的识别
