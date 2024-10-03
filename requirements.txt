@@ -9,3 +9,10 @@ PyQt5
 python-docx
 python-vlc
 whisper
+langchain
+langchain_openai
+langchain_anthropic
+groq
+langchain-community
+
+
