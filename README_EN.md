@@ -9,6 +9,7 @@ The Video Formalization Processor is a versatile Python application designed for
 - **Document Handling**: Load PDF documents related to video content.
 - **Subtitle Generation**: Automatically generate SRT subtitles, allowing user corrections in the edit box.
 - **Text-Image Mixing**: Support inserting PDF pages into the subtitle edit box.
+- **Find and Replace**: Support using Ctrl+F for search and Ctrl+H for replace, allowing users to quickly locate and modify text content.
 - **Document Saving**: Save edited content as HTML documents for subsequent loading and editing.
 - **Formalization**: Convert edited content into standardized WORD documents.
 
@@ -29,7 +30,7 @@ pip install -r requirements.txt
 5. **Insert PDF Content**: Double-click the displayed PDF pages on the left to insert them into the right edit box.
 6. **Save HTML Document**: Click the "Save HTML Document" button to temporarily save the content in the edit box.
 7. **Load HTML Document**: Click the "Load HTML Document" button to load previously saved content.
-8. **Formalization**: Click the "Formalization" button and enter the OPENAI KEY to convert content into the final WORD article.
+8. **Formalization**: Select the API provider's API, such as OpenAI, and enter the APIKEY. Click the "Formalization" button to convert the edited content into a WORD document.
 
 ## Contribution
 Contributions to the Video Formalization Processor are welcome. Please follow these steps to contribute:
